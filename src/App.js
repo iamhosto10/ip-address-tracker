@@ -1,14 +1,35 @@
 import arrow from "./images/icon-arrow.svg";
 import background from "./images/pattern-bg.png";
-import {MapContainer, TileLayer, Marker,Popup } from "react-leaflet";
+import {MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css"
-import { useState } from "react";
-import icon from "./icon"
+import { useEffect, useState } from "react";
+import icon from "./icon";
+
+// import { map } from "leaflet";
 
 //https://geo.ipify.org/api/v2/country?apiKey=at_hNsejjtlZB9giOoN9kFFhE26FvUSY&ipAddress=8.8.8.8
 
 function App() {
-  const [position,setPosition] = useState([51.505,-0.09]);
+  const [position,setPosition] = useState([37.38605,-122.08385]);
+  const [address,setAddress] = useState(null);
+  // const [ipAddress,setipAddress] = useState("");
+  // const map = useMap();
+
+  useEffect(() => {
+    try{
+      const getinitalData = async () =>{
+        const res  = await fetch(`https://geo.ipify.org/api/v2/country,city?apiKey=${process.env.REACT_APP_API_KEY}&ipAddress=8.8.8.8`);//181.52.252.176`);
+        const data = await res.json()
+        setAddress(data);
+        setPosition([data.location.lat,data.location.lng]);
+        await console.log(data,"hola");
+      }
+      getinitalData();
+    }catch(e){
+      console.log(e);
+    }
+  }, [])
+
   
   return (
     <>
@@ -29,7 +50,7 @@ function App() {
             IP Address
           </h2>
           <p className="font-semibold text-lg md:text-xl xl:text-2xl text-center md:text-left" style={{color:'hsl(0, 0%, 17%)',}}>
-            192.212.174.101
+            {address && address.ip}
           </p>
         </div>
         <div className="lg:border-r lg:border-slate-400">
@@ -37,7 +58,7 @@ function App() {
             Location
           </h2>
           <p className="font-semibold text-lg md:text-xl xl:text-2xl text-center md:text-left" style={{color:'hsl(0, 0%, 17%)',}}>
-            Brooklyn
+          {address && address.location.city},{address && address.location.region}
           </p>
         </div>
         <div className="lg:border-r lg:border-slate-400">
@@ -45,7 +66,7 @@ function App() {
             Timezone
           </h2>
           <p className="font-semibold text-lg md:text-xl xl:text-2xl text-center md:text-left" style={{color:'hsl(0, 0%, 17%)',}}>
-            UTC -5
+            UTC {address && address.location.timezone}
           </p>
         </div>
         <div >
@@ -53,8 +74,7 @@ function App() {
             ISP
           </h2>
           <p className="font-semibold text-lg md:text-xl xl:text-2xl text-center md:text-left" style={{color:'hsl(0, 0%, 17%)',}}>
-            Spacex
-            Starlink
+          {address && address.isp}
           </p>
         </div>
       </article>
@@ -64,9 +84,9 @@ function App() {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <Marker position={position} icon={icon}>
-        <Popup>
-          A pretty CSS3 popup. <br /> Easily customizable.
-        </Popup>
+            <Popup>
+            A pretty CSS3 popup. <br /> Easily customizable.
+            </Popup>
         </Marker>
       </MapContainer>
     </section>
