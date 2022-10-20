@@ -13,6 +13,7 @@
 
 # misc
 .DS_Store
+.env
 .env.local
 .env.development.local
 .env.test.local
@@ -23,13 +24,13 @@ yarn-debug.log*
 yarn-error.log*
 # Avoid accidental Sketch file upload 
 ###############################################
-## Please do not remove line 5 - thanks! 🙂 ##
+## Please do not remove line 29 - thanks! 🙂 ##
 ###############################################
 *.sketch
 
 # Avoid accidental XD or Figma upload if you convert the design file
 #######################################################
-## Please do not remove lines 11 and 12 - thanks! 🙂 ##
+## Please do not remove lines 35 and 36 - thanks! 🙂 ##
 #######################################################
 *.xd
 *.fig
