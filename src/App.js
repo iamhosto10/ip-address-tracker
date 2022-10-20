@@ -1,7 +1,6 @@
 import arrow from "./images/icon-arrow.svg";
 import background from "./images/pattern-bg.png";
-import location from "./images/icon-location.svg";
-import {MapContainer, TileLayer, useMap,Marker,Popup } from "react-leaflet";
+import {MapContainer, TileLayer, Marker,Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css"
 import { useState } from "react";
 import icon from "./icon"
@@ -21,10 +20,10 @@ function App() {
         <h1 className="text-2xl text-center text-white font-bold "> IP Address Tracker</h1>
         <form className="mt-8 flex justify-center max-w-md mx-auto">
           <input type="text" name= "ipaddress" id = "ipaddress" className="pt-6 pb-5 px-5 rounded-l-lg w-full"  placeholder="Search for any IP Address or domain" required/>
-          <button type="submit" className="py-7 px-5 rounded-r-lg bg-black hover:opacity-80"> <img src ={arrow} alt ="arrow" className="h-4/5"  /></button> 
+          <button onClick={()=> setPosition(position)} type="submit" className="py-7 px-5 rounded-r-lg bg-black hover:opacity-80"> <img src ={arrow} alt ="arrow" className="h-4/5"  /></button> 
         </form>
       </article>
-      <article className="bg-white rounded-lg shadow p-8 mt-8 mx-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4 max-w-6xl lg:mx-auto lg:-mb-16 relative" style={{zIndex:100000,}}>
+      <article className="bg-white rounded-lg shadow p-8 mt-8 mx-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4 max-w-6xl lg:mx-auto lg:-mb-16 md:-mb-24 -mb-60 relative" style={{zIndex:100000,}}>
         <div className="lg:border-r lg:border-slate-400">
           <h2 className="uppercase text-sm font-bold tracking-wider text-center md:mb-2 md:text-left " style={{color:'hsl(0, 0%, 59%)',}}>
             IP Address
