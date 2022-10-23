@@ -1,10 +1,11 @@
 import arrow from "./images/icon-arrow.svg";
 import background from "./images/pattern-bg.png";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { useEffect, useState } from "react";
-import icon from "./icon";
+// import icon from "./icon";
 import { Section } from "./cover/cover.elements";
+import Markerposition from "./Components/Markerposition";
 
 // import { map } from "leaflet";
 
@@ -49,6 +50,7 @@ function App() {
     } catch (e) {
       console.log(e);
     }
+    setSearch("");
   };
   return (
     <>
@@ -120,7 +122,7 @@ function App() {
             // className="font-semibold text-lg md:text-xl xl:text-2xl text-center md:text-left"
             // style={{ color: "hsl(0, 0%, 17%)" }}
             >
-              {address && address.location.city},
+              {address && address.location.city},<br />
               {address && address.location.region}
             </p>
           </div>
@@ -147,8 +149,8 @@ function App() {
               ISP
             </h2>
             <p
-              className="font-semibold text-lg md:text-xl xl:text-2xl text-center md:text-left"
-              style={{ color: "hsl(0, 0%, 17%)" }}
+            // className="font-semibold text-lg md:text-xl xl:text-2xl text-center md:text-left"
+            // style={{ color: "hsl(0, 0%, 17%)" }}
             >
               {address && address.isp}
             </p>
@@ -164,11 +166,14 @@ function App() {
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-          <Marker position={position} icon={icon}>
+          {/* <Marker position={position} icon={icon}>
             <Popup>
               A pretty CSS3 popup. <br /> Easily customizable.
+              {address && address.location.city},<br />
+              {address && address.location.region}
             </Popup>
-          </Marker>
+          </Marker> */}
+          <Markerposition address={address} />
         </MapContainer>
       </Section>
     </>
