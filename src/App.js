@@ -15,9 +15,6 @@ function App() {
   const [position, setPosition] = useState([37.38605, -122.08385]);
   const [address, setAddress] = useState(null);
   const [search, setSearch] = useState("");
-  // const [ipAddress,setipAddress] = useState("");
-  // const map = useMap();
-
   useEffect(() => {
     try {
       const getinitalData = async () => {
@@ -58,102 +55,43 @@ function App() {
         <img src={background} alt="" className="w-full h-80 object-cover" />
       </div>
       <Section>
-        {/* //className="relative pt-8" */}
         <article>
-          <h1>
-            {/* //className="text-2xl text-center text-white font-bold " */}
-            IP Address Tracker
-          </h1>
+          <h1>IP Address Tracker</h1>
           <form onSubmit={searchAPI}>
-            {/* className="mt-8 flex justify-center max-w-md mx-auto" */}
             <input
               type="text"
               name="ipaddress"
               id="ipaddress"
               onChange={(e) => setSearch(e.target.value)}
               value={search}
-              // className="pt-6 pb-5 px-5 rounded-l-lg w-full"
               placeholder="Search for any IP Address or domain"
               required
             />
-            <button
-              // onClick={() => setPosition(position)}
-              type="submit"
-              // className="py-7 px-5 rounded-r-lg bg-black hover:opacity-80"
-            >
+            <button type="submit">
               {" "}
-              <img
-                src={arrow}
-                alt="arrow"
-                // className="h-4/5"
-              />
+              <img src={arrow} alt="arrow" />
             </button>
           </form>
         </article>
-        <article
-          className="informacion"
-          //  bg-white rounded-lg shadow p-8 mt-8 mx-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4 max-w-6xl lg:mx-auto lg:-mb-16 md:-mb-24 -mb-60 relative
-          // style={{ zIndex: 100000 }}
-        >
+        <article className="informacion">
           <div className="bord ">
-            {/* lg:border-r lg:border-slate-400 */}
-            <h2
-            // className="uppercase text-sm font-bold tracking-wider text-center md:mb-2 md:text-left "
-            // style={{ color: "hsl(0, 0%, 59%)" }}
-            >
-              IP Address
-            </h2>
-            <p
-            // className="font-semibold text-lg md:text-xl xl:text-2xl text-center md:text-left"
-            // style={{ color: "hsl(0, 0%, 17%)" }}
-            >
-              {address && address.ip}
-            </p>
+            <h2>IP Address</h2>
+            <p>{address && address.ip}</p>
           </div>
           <div className="bord ">
-            {/* lg:border-r lg:border-slate-400 */}
-            <h2
-            // className="uppercase text-sm font-bold tracking-wider text-center md:mb-2 md:text-left "
-            // style={{ color: "hsl(0, 0%, 59%)" }}
-            >
-              Location
-            </h2>
-            <p
-            // className="font-semibold text-lg md:text-xl xl:text-2xl text-center md:text-left"
-            // style={{ color: "hsl(0, 0%, 17%)" }}
-            >
+            <h2>Location</h2>
+            <p>
               {address && address.location.city},<br />
               {address && address.location.region}
             </p>
           </div>
           <div className="bord ">
-            {/* lg:border-r lg:border-slate-400 */}
-            <h2
-            // className="uppercase text-sm font-bold tracking-wider text-center md:mb-2 md:text-left "
-            // style={{ color: "hsl(0, 0%, 59%)" }}
-            >
-              Timezone
-            </h2>
-            <p
-            // className="font-semibold text-lg md:text-xl xl:text-2xl text-center md:text-left"
-            // style={{ color: "hsl(0, 0%, 17%)" }}
-            >
-              UTC {address && address.location.timezone}
-            </p>
+            <h2>Timezone</h2>
+            <p>UTC {address && address.location.timezone}</p>
           </div>
           <div>
-            <h2
-            // className="uppercase text-sm font-bold tracking-wider text-center md:mb-2 md:text-left "
-            // style={{ color: "hsl(0, 0%, 59%)" }}
-            >
-              ISP
-            </h2>
-            <p
-            // className="font-semibold text-lg md:text-xl xl:text-2xl text-center md:text-left"
-            // style={{ color: "hsl(0, 0%, 17%)" }}
-            >
-              {address && address.isp}
-            </p>
+            <h2>ISP</h2>
+            <p>{address && address.isp}</p>
           </div>
         </article>
         <MapContainer
@@ -173,7 +111,7 @@ function App() {
               {address && address.location.region}
             </Popup>
           </Marker> */}
-          <Markerposition address={address} />
+          {address ? <Markerposition address={address} /> : ""}
         </MapContainer>
       </Section>
     </>

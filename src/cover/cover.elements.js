@@ -67,7 +67,7 @@ export const Section = styled.section`
     display: grid;
     grid-template-columns: repeat(1, minmax(0, 1fr));
     gap: 2rem /* 32px */;
-    max-width: 72rem /* 1152px */;
+    max-width: 72rem /*1152px*/;
     margin-bottom: -15rem /* -240px */;
   }
 
